@@ -1,0 +1,196 @@
+{{ define "title" }}
+<title>{{ .Title }} | Task Management System</title>
+{{ end }}
+
+{{ define "style" }}
+{{ end }}
+
+{{ define "content" }}
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Profile</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+        <li class="breadcrumb-item"><a href="/tms/create_user">Users</a></li>
+        <li class="breadcrumb-item active">Users List</a></li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section profile">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="card mb-3">
+
+          <ul class="nav nav-tabs nav-tabs-bordered">
+            <li class="nav-item">
+              <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#user-list">User List</button>
+            </li>
+
+            <li class="nav-item">
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#create-user">Create User</button>
+            </li>
+          </ul>
+
+          <div class="tab-content pt-2">
+
+            <div class="tab-pane fade show active user-list" id="user-list">
+              <div class="card-body">
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Username</th>
+                      <th>Job</th>
+                      <th>Admin</th>
+                      <th>Active</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{ range .Employee }}
+                    <tr>
+                      <td>{{ .FirstName }} {{ .LastName }}</td>
+                      <td>{{ .Email }}</td>
+                      <td>{{ .Username }}</td>
+                      <td>{{ .Job }}</td>
+
+                      {{ if eq .Admin true }}
+                      <td><i class="bi bi-check-circle text-success"></i></td>
+                      {{ else }}
+                      <td><i class="bi bi-x-circle text-danger"></i></td>
+                      {{ end }}
+
+                      {{ if eq .Active true }}
+                      <td><i class="bi bi-check-circle text-success"></i></td>
+                      {{ else }}
+                      <td><i class="bi bi-x-circle text-danger"></i></td>
+                      {{ end }}
+                    </tr>
+                    {{ end }}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+  
+            <div class="tab-pane fade create-user pt-3" id="create-user">
+              <div class="card-body">
+    
+                <div class="pt-4 pb-2">
+                  <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                  <p class="text-center small">Enter personal details to create account</p>
+                </div>
+    
+                <form id="userForm" class="row g-3 needs-validation" novalidate>
+    
+                  <div class="d-flex flex-column align-items-center justify-content-center gap-3">
+                    <div class="d-flex flex-row align-items-center">
+                      <a href="#" id="uploadBtn" class="btn btn-primary btn-sm" title="Upload new profile image">
+                        <i class="bi bi-upload"></i>
+                      </a>
+                      <img src="/static/assets/img/profile-img.png" style="height: 130px; width: 160px" id="profile_image" alt="Profile">
+                      <!-- Hidden file input -->
+                      <input type="file" id="fileInput" accept="image/*" hidden>
+                    </div>
+    
+                    <div class="d-flex flex-row gap-5">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" name="admin" type="checkbox" id="admin">
+                        <label class="form-check-label" for="admin">Admin</label>
+                      </div>
+                    
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" name="active" type="checkbox" id="active">
+                        <label class="form-check-label" for="active">Active</label>
+                      </div>
+                    </div>
+                  </div>
+    
+                  <div class="col-12">
+                    <label for="firstname" class="form-label">First Name</label>
+                    <input type="text" name="first_name" class="form-control" id="firstname" required>
+                    <div class="invalid-feedback">Please, enter your first name!</div>
+                  </div>
+    
+                  <div class="col-12">
+                    <label for="lastname" class="form-label">Last Name</label>
+                    <input type="text" name="last_name" class="form-control" id="lastname" required>
+                    <div class="invalid-feedback">Please, enter your last name!</div>
+                  </div>
+    
+                  <div class="col-12">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" id="email" required>
+                    <div class="invalid-feedback">Please enter a valid email adddress!</div>
+                  </div>
+    
+                  <div class="col-12">
+                    <label for="username" class="form-label">Username</label>
+                    <div class="input-group has-validation">
+                      <span class="input-group-text" id="inputGroupPrepend">
+                        <i class="bi bi-person-fill"></i>
+                      </span>
+                      <input type="text" name="username" class="form-control" id="username" required autocomplete="username" required>
+                      <div class="invalid-feedback">Please choose a username.</div>
+                    </div>
+                  </div>
+    
+                  <div class="col-12">
+                    <label for="current-password" class="form-label">Password</label>
+                    <div class="input-group has-validation">
+                      <span class="input-group-text" id="inputGroupPrepend">
+                        <i class="bi bi-lock"></i>
+                      </span>
+                      <input type="password" name="password" class="form-control" id="current-password" required autocomplete="current-password" required>
+                      <div class="invalid-feedback">Please enter the password!</div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="phone_number" class="form-label">Phone Number</label>
+                    <input type="text" name="phone_number" class="form-control" id="phone_number">
+                  </div>
+                  
+                  <div class="col-12">
+                    <label for="company" class="form-label">Company</label>
+                    <input type="text" name="company" class="form-control" id="company">
+                  </div>
+    
+                  <div class="col-12">
+                    <label for="job" class="form-label">Job</label>
+                    <input type="text" name="job" class="form-control" id="job">
+                  </div>
+    
+                  <div class="col-12">
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" name="country" class="form-control" id="country">
+                  </div>
+    
+                  <div class="col-12">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" name="address" class="form-control" id="address">
+                  </div>
+    
+                  <div class="col-12">
+                    <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                  </div>
+                </form>
+              
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main><!-- End #main -->
+{{ end }}
+
+{{ define "script" }}
+<script src="/static/assets/js/create_user.js"></script>
+{{ end }}

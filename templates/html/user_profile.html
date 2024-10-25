@@ -1,0 +1,250 @@
+{{ define "title" }}
+<title>{{ .Title }} | Task Management System</title>
+{{ end }}
+
+{{ define "style" }}
+{{ end }}
+
+{{ define "content" }}
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Profile</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+        <li class="breadcrumb-item">Users</li>
+        <li class="breadcrumb-item active">Profile</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section profile">
+    <div class="row">
+      <div class="col-xl-4">
+
+        <div class="card">
+          <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+            <img src="" alt="Profile" class="rounded-circle" id="emp-profile">
+            <h2 id="emp-name"></h2>
+            <h3 id="emp-job"></h3>
+            <div class="d-flex social-links mt-2">
+              <a class="twitter" id="emp-admin" style="display: none;" title="Admin"><i class="bi bi-person-check"></i></a> <!-- Admin -->
+              <a class="twitter" id="emp-active" style="display: none;" title="Active"><i class="bi bi-patch-plus"></i></a> <!-- Active -->
+              
+              <a class="twitter" id="emp-user" style="display: none;" title="User"><i class="bi bi-person-x"></i></a> <!-- Not Admin -->
+              <a class="twitter" id="emp-inactive" style="display: none;" title="Inactive"><i class="bi bi-patch-minus"></i></a> <!-- Inactive -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-xl-8">
+
+        <div class="card">
+          <div class="card-body pt-3">
+            <!-- Bordered Tabs -->
+            <ul class="nav nav-tabs nav-tabs-bordered">
+
+              <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+              </li>
+
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+              </li>
+
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
+              </li>
+
+            </ul>
+            <div class="tab-content pt-2">
+
+              <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                <h5 class="card-title">Profile Details</h5>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Full Name</div>
+                  <div class="col-lg-9 col-md-8" id="emp_name"></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Company</div>
+                  <div class="col-lg-9 col-md-8" id="emp_company"></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Job</div>
+                  <div class="col-lg-9 col-md-8" id="emp_job"></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Country</div>
+                  <div class="col-lg-9 col-md-8" id="emp_country"></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Address</div>
+                  <div class="col-lg-9 col-md-8" id="emp_address"></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Phone</div>
+                  <div class="col-lg-9 col-md-8" id="emp_phone"></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Email</div>
+                  <div class="col-lg-9 col-md-8" id="emp_email"></div>
+                </div>
+
+              </div>
+
+              <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+                <!-- Profile Edit Form -->
+                <form>
+                  <div class="row mb-3">
+                    <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
+                    <div class="col-md-8 col-lg-9">
+                      <img src="/static/assets/img/profile-img.png" id="profile_image" alt="Profile">
+                      <a href="#" id="uploadBtn" class="btn btn-primary btn-sm" title="Upload new profile image" hidden>
+                        <i class="bi bi-upload"></i>
+                      </a>
+                      <!-- Hidden file input -->
+                      <input type="file" id="fileInput" accept="image/*" hidden>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="firstName" class="col-md-4 col-lg-3 col-form-label">First Name</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="firstName" type="text" class="form-control" id="firstName">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="lastName" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="lastName" type="text" class="form-control" id="lastName">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="company" type="text" class="form-control" id="company">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="job" type="text" class="form-control" id="Job">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="country" type="text" class="form-control" id="Country">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="address" type="text" class="form-control" id="Address">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="phone" type="text" class="form-control" id="Phone">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="email" type="email" class="form-control" id="Email">
+                    </div>
+                  </div>
+
+                  <div id="admin_display" style="display: none;">
+                    <div class="row mb-3">
+                      <label class="col-md-4 col-lg-3 col-form-label" for="admin">Admin</label>
+                      <div class="d-flex align-items-center col-md-8 col-lg-9">
+                        <div class="form-switch">
+                          <input class="form-check-input" name="admin" type="checkbox" id="admin">
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                      <label class="col-md-4 col-lg-3 col-form-label" for="active">Active</label>
+                      <div class="d-flex align-items-center col-md-8 col-lg-9">
+                        <div class="form-switch">
+                          <input class="form-check-input" name="active" type="checkbox" id="active">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <button class="btn btn-primary" id="edit-user-btn" type="submit">Save Changes</button>
+                  </div>
+                </form><!-- End Profile Edit Form -->
+
+              </div>
+
+              <div class="tab-pane fade pt-3" id="profile-change-password">
+                <!-- Change Password Form -->
+                <form>
+
+                  <div class="row mb-3">
+                    <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="password" type="password" class="form-control" id="currentPassword" autocomplete="current-password">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="newpassword" type="password" class="form-control" id="newPassword" autocomplete="new-password">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="renewpassword" type="password" class="form-control" id="renewPassword" autocomplete="new-password">
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Change Password</button>
+                  </div>
+                </form><!-- End Change Password Form -->
+
+              </div>
+
+            </div><!-- End Bordered Tabs -->
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main><!-- End #main -->
+{{ end }}
+
+{{ define "script" }}
+<script src="/static/assets/js/user_profile.js"></script>
+{{ end }}
